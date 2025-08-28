@@ -20,6 +20,15 @@ pipeline {
             }
         }
 
+        stage('Install System Dependencies') {
+    steps {
+        sh '''
+            sudo apt-get update
+            sudo apt-get install -y pkg-config default-libmysqlclient-dev build-essential
+        '''
+    }
+}
+
         stage('Set up Virtual Environment') {
             steps {
                 sh """
