@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'master', url: 'https://github.com/Murtaza7n/Hrm-System.git'
+                git branch: 'master', url: 'https://github.com/farhan-mehar/HRM.git'
             }
         }
 
