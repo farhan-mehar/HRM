@@ -24,6 +24,17 @@ pipeline {
             }
         }
 
+        stage('Install MySQL Client') {
+            steps {
+                sh """
+                sudo apt-get update
+                sudo apt-get install -y default-mysql-client libmysqlclient-dev
+                . ${VENV}/bin/activate
+                pip install mysqlclient
+                """
+            }
+        }
+
         stage('Run Migrations') {
             steps {
                 sh """
