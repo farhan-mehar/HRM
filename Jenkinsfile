@@ -5,7 +5,7 @@ pipeline {
         PYTHON = "/usr/bin/python3"
         VENV = ".venv"
 
-        # MySQL Database Credentials (secure way)
+        // MySQL Database Credentials (secure way)
         DB_NAME = "hrm_db"
         DB_USER = "hrm_user"
         DB_PASSWORD = "your_password_here"
