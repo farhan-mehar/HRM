@@ -16,8 +16,8 @@ pipeline {
         stage('Set up Virtual Environment') {
             steps {
                 sh """
-                python3 -m venv ${VENV}
-                source ${VENV}/bin/activate
+                ${PYTHON} -m venv ${VENV}
+                . ${VENV}/bin/activate
                 pip install --upgrade pip
                 pip install -r requirements.txt
                 """
@@ -27,7 +27,7 @@ pipeline {
         stage('Run Migrations') {
             steps {
                 sh """
-                source ${VENV}/bin/activate
+                . ${VENV}/bin/activate
                 python manage.py makemigrations
                 python manage.py migrate
                 """
@@ -37,7 +37,7 @@ pipeline {
         stage('Run Tests') {
             steps {
                 sh """
-                source ${VENV}/bin/activate
+                . ${VENV}/bin/activate
                 python manage.py test
                 """
             }
@@ -46,7 +46,7 @@ pipeline {
         stage('Collect Static Files') {
             steps {
                 sh """
-                source ${VENV}/bin/activate
+                . ${VENV}/bin/activate
                 python manage.py collectstatic --noinput
                 """
             }
@@ -57,10 +57,10 @@ pipeline {
                 branch 'master'
             }
             steps {
-                echo 'Deploying application...'
-                // Example: Copy project files to server or build docker image
+                echo '🚀 Deploying application...'
+                // Example deployment steps:
                 // sh 'scp -r * user@server:/path/to/deploy/'
-                // or docker build & push
+                // OR docker build & push
             }
         }
     }
@@ -74,4 +74,3 @@ pipeline {
         }
     }
 }
-
