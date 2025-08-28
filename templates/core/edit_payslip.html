@@ -1,0 +1,20 @@
+{% extends 'core/base.html' %}
+{% block page_title %}Edit Payslip{% endblock %}
+{% block content %}
+<div class="card mt-4">
+  <div class="card-body">
+    <h4 class="card-title">Edit Payslip</h4>
+    <form method="post">
+      {% csrf_token %}
+      <div class="row g-2">
+        <div class="col-md-3">{{ form.date }}</div>
+        <div class="col-md-3">{{ form.period_start }}</div>
+        <div class="col-md-3">{{ form.period_end }}</div>
+        <div class="col-md-3">{{ form.status }}</div>
+      </div>
+      <button type="submit" class="btn btn-primary">Save Changes</button>
+      <a href="{% url 'admin_payslips' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+  </div>
+</div>
+{% endblock %} 
