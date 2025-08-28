@@ -5,7 +5,7 @@ pipeline {
         PYTHON = "/usr/bin/python3"
         VENV = ".venv"
 
-        // MySQL Database Credentials (secure way)
+        // MySQL Database Credentials
         DB_NAME = "hrm_db"
         DB_USER = "hrm_user"
         DB_PASSWORD = "your_password_here"
@@ -21,13 +21,17 @@ pipeline {
         }
 
         stage('Install System Dependencies') {
-    steps {
-        sh '''
-            sudo apt-get update
-            sudo apt-get install -y pkg-config default-libmysqlclient-dev build-essential
-        '''
-    }
-}
+            steps {
+                sh '''
+                # If Jenkins user has passwordless sudo configured:
+                # sudo apt-get update && sudo apt-get install -y pkg-config default-libmysqlclient-dev build-essential
+
+                # Otherwise, just try without sudo (works if image/container already has deps):
+                apt-get update || true
+                apt-get install -y pkg-config default-libmysqlclient-dev build-essential || true
+                '''
+            }
+        }
 
         stage('Set up Virtual Environment') {
             steps {
